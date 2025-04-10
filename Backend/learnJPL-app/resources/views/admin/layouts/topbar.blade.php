@@ -10,7 +10,7 @@
                     </button>
                 </li> 
                 <li class="mx-3 welcome-text">
-                    <h3 class="mb-0 fw-bold text-truncate">Xin chào, {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}!</h3>
+                    {{-- <h3 class="mb-0 fw-bold text-truncate">Xin chào, {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}!</h3> --}}
                     <!-- <h6 class="mb-0 fw-normal text-muted text-truncate fs-14">Here's your overview this week.</h6> -->
                 </li>                   
             </ul>
@@ -36,14 +36,14 @@
                                 <img src="{{asset('admin-asset')}}/assets/images/users/avatar-1.jpg" alt="" class="thumb-md rounded-circle">
                             </div>
                             <div class="flex-grow-1 ms-2 text-truncate align-self-center">
-                                <h6 class="my-0 fw-medium text-dark fs-13">{{ Auth::user()->firstname }}{{ Auth::user()->lastname }}</h6>
-                                <small class="text-muted mb-0">
-                                    @if (Auth::user()->role_id==2)
+                                {{-- <h6 class="my-0 fw-medium text-dark fs-13">{{ Auth::user()->firstname }}{{ Auth::user()->lastname }}</h6> --}}
+                                {{-- <small class="text-muted mb-0">
+                                    @if (Auth::user()->role_id==1)
                                     <span>Quản lý </span>
                                     @else
                                     <span>Quản lý cấp cao </span>  
                                     @endif
-                                </small>
+                                </small> --}}
                             </div><!--end media-body-->
                         </div>
                         <a class="dropdown-item text-danger" href="{{route('admin.logout')}}"><i class="las la-power-off fs-18 me-1 align-text-bottom"></i> Logout</a>

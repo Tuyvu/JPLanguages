@@ -3,7 +3,7 @@
 @section('mainad-content')
 <div class="page-wrapper">
     <!-- Page Content-->
-    <div class="page-content">
+    {{-- <div class="page-content">
         <div class="container-xxl">
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-xl-4">
@@ -195,7 +195,7 @@
             
         </div>
         <!--end footer-->
-    </div>
+    </div> --}}
     <!-- end page content -->
 </div>
 @endsection

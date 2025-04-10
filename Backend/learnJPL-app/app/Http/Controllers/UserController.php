@@ -13,6 +13,7 @@ class UserController extends Controller
         // $user = Auth::user();
         if(Auth::attempt(['email' => $req->email, 'password' => $req->password])){
              $user = Auth::user();
+             session(['user' => $user]);
             return response()->json([
                 'message' => 'Login successful',
                 'user' => $user,
@@ -35,11 +36,8 @@ class UserController extends Controller
             'message' => 'register successful',
         ], 200);
     }
-    public function logout()
-    {
+    public function logout(Request $request){
         Auth::logout();
-        return response()->json([
-            'message' => 'Logout successful'
-        ], 200);
+        return response()->json(['message' => 'Logout successful'], 200);
     }
 }

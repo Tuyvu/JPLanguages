@@ -5,6 +5,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CoursesController;
+use App\Http\Controllers\Admin\LessonsController;
+use App\Http\Controllers\Admin\TestsController;
+use App\Http\Controllers\Admin\CustomerController;
 
 
 
@@ -15,29 +19,25 @@ Route::get('/logon', [AdminController::class, 'logon'])->name('logon');
 Route::post('/logon', [AdminController::class, 'postlogon'])->name('postlogon');
 Route::get('/logoutadmin', [AdminController::class, 'logout'])->name('admin.logout');
 
-// Route::prefix('admin')->middleware(AdminMiddleware::class)->group(function () {
-//     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-//     Route::get('/uploadimage', [AdminController::class, 'uploadimage'])->name('admin.uploadimages');
-//     Route::post('/uploadimage', [AdminController::class, 'postuploadimage'])->name('admin.postuploadimage');
-    
-//     Route::resource('category', CategoryController::class);
-//     Route::get('/category-trash', [CategoryController::class, 'restore'])->name('category.restore');
-//     Route::get('/category-trash/{id}', [CategoryController::class, 'restore_id'])->name('category.restore_id');
-//     Route::get('/category-foredelete/{id}', [CategoryController::class, 'foredelete'])->name('category.foredelete');
-    
-//     Route::get('/customer', [AdminController::class, 'customer'])->name('admin.customer');
-//     Route::get('/order', [OrderController::class, 'getAllOrder'])->name('admin.order');
-//     Route::get('/orderconfirm', [OrderController::class, 'getAllOrdercomfirm'])->name('admin.ordercomfirm');
-//     Route::get('/order/{order}', [OrderController::class, 'confirmOrder'])->name('order.confirm');
-//     Route::get('/orderback/{id}', [OrderController::class, 'finishOrder'])->name('order.finishOrder');
+Route::get('/admim', [AdminController::class, 'index'])->name('admin.index');
 
-//     Route::get('/shipall', [OrderController::class, 'getAllOrdership'])->name('admin.ordership');
-//     Route::get('/shipconfim', [OrderController::class, 'getAllshipcomfirm'])->name('order.getAllshipcomfirm');
-//     Route::get('/shipoder/{order}', [OrderController::class, 'confirmOrdership'])->name('order.confirmship');
-//     Route::get('/ship/{id}', [OrderController::class, 'finishOrdership'])->name('order.finishOrdership');
+Route::prefix('admin')->middleware(AdminMiddleware::class)->group(function () {
+    
+    Route::resource('courses', CoursesController::class);
+    Route::get('/courses-trash', [CoursesController::class, 'restore'])->name('courses.restore');
+    Route::get('/courses-trash/{id}', [CoursesController::class, 'restore_id'])->name('courses.restore_id');
+    Route::get('/courses-foredelete/{id}', [CoursesController::class, 'foredelete'])->name('courses.foredelete');
+    
+    Route::resource('lessons', LessonsController::class);
+    Route::get('/lessons-trash', [LessonsController::class, 'restore'])->name('lessons.restore');
+    Route::get('/lessons-trash/{id}', [LessonsController::class, 'restore_id'])->name('lessons.restore_id');
+    Route::get('/lessons-foredelete/{id}', [LessonsController::class, 'foredelete'])->name('lessons.foredelete');
 
-//     Route::resource('product', ProductController::class);
-//     Route::get('/product-trash', [ProductController::class, 'restore'])->name('product.restore');
-//     Route::get('/product-trash/{id}', [ProductController::class, 'restore_id'])->name('product.restore_id');
-//     Route::get('/product-foredelete/{id}', [ProductController::class, 'foredelete'])->name('product.foredelete');
-// });
+    Route::resource('tests', TestsController::class);
+    Route::get('/tests-trash', [TestsController::class, 'restore'])->name('tests.restore');
+    Route::get('/tests-trash/{id}', [TestsController::class, 'restore_id'])->name('tests.restore_id');
+    Route::get('/tests-foredelete/{id}', [TestsController::class, 'foredelete'])->name('tests.foredelete');
+
+    Route::get('/customer', [CustomerController::class, 'getAllCustomer'])->name('customer.index');
+    
+});

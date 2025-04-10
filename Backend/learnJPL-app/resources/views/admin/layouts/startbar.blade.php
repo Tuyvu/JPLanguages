@@ -46,24 +46,20 @@
                                     </a>
                                     <div class="collapse " id="sidebarAnalytics">
                                         <ul class="nav flex-column">
+                                            
                                             <li class="nav-item">
-                                                <a href="{{route('admin.customer')}}" class="nav-link ">Khách hàng</a>
+                                                <a href="{{ route('courses.index') }}" class="nav-link ">Thêm khóa học</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{route('category.index')}}" class="nav-link ">Danh mục</a>
+                                                <a href="{{ route('lessons.index') }}" class="nav-link ">Thêm bài học</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{route('product.index')}}" class="nav-link ">Sản phẩm</a>
+                                                <a href="{{ route('tests.index') }}" class="nav-link ">Thêm bài bài kiểm tra</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{route('admin.order')}}" class="nav-link ">Hóa đơn</a>
+                                                <a href="{{ route('customer.index') }}" class="nav-link ">Người học</a>
                                             </li><!--end nav-item-->
-                                            <li class="nav-item">
-                                                <a href="{{route('admin.ordership')}}" class="nav-link ">Giao hàng</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{route('admin.uploadimages')}}" class="nav-link ">Cập nhật ảnh của hàng</a>
-                                            </li><!--end nav-item-->
+
                                         </ul><!--end nav-->
                                     </div>
                                 </li><!--end nav-item-->                                
@@ -71,19 +67,6 @@
                             </ul><!--end nav-->
                         </div><!--end startbarApplications-->
                     </li>
-                    @if (Auth::user()->role_id==1)
-                        <li class="nav-item">
-                        <a class="nav-link" href="{{route('sadmin.staff')}}">
-                            <i class="iconoir-peace-hand menu-icon"></i>
-                            <span>Nhân viên</span>
-                        </a>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('discount')}}">
-                                <i class="iconoir-journal-page menu-icon"></i>
-                                <span>Chương trình giảm giá</span>
-                            </a><!--end startbarDashboards-->
-                    </li><!--end nav-item-->
-                    @endif
             </div>
         </div><!--end startbar-collapse-->
     </div><!--end startbar-menu-->    

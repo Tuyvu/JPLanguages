@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -18,6 +17,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'id',
         'firstname',
         'lastname',
         'email',
@@ -26,6 +26,24 @@ class User extends Authenticatable
         'role_id',
         'address'
     ];
+    public function userCourses()
+    {
+        return $this->hasMany(User_courses::class, 'user_id');
+    }
+    public function userTests()
+    {
+        return $this->hasMany(User_tests::class, 'user_id');
+    }
+
+    public function countCourses(): int
+    {
+        return $this->userCourses()->count();
+    }
+
+    public function averageScore(): float
+    {
+        return round($this->userTests()->avg('score') ?? 0, 2);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

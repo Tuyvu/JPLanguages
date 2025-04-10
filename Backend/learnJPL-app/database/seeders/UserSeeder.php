@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Hash;
 
+
 class UserSeeder extends Seeder
 {
     /**

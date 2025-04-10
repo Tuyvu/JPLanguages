@@ -31,14 +31,13 @@
 
     <!-- Top Bar Start -->
   @include('admin.layouts.topbar')
-    <!-- Top Bar End -->
+    <!-- Top Bar End --> 
     <!-- leftbar-tab-menu -->
   @include('admin.layouts.startbar')
 
     <!--end startbar-->
-    <div class="startbar-overlay d-print-none"></div>
     <!-- end leftbar-tab-menu-->
-
+    <div class="startbar-overlay d-print-none"></div>
     @yield('mainad-content')
     <!-- end page-wrapper -->
 

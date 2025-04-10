@@ -18,18 +18,24 @@
                         <tr>
             
                             <th>#</th>
-                            <th>tên</th>
-                            <th>email</th>
-                            <th>Số điện thoại</th>
+                            <th>Tên</th>
+                            <th>Email</th>
+                            <th>Số khóa học đăng ký</th>
+                            <th>Trung bình điểm</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                            @forelse ($user as $index => $item)
+                            @forelse ($customer as $index => $item)
                             <tr>
-                                <td>{{ $user->firstItem() + $index }}</td>
+                                <td>{{ $customer->firstItem() + $index }}</td>
                                 <td>{{$item->firstname}} {{$item->lastname}}</td>
                                 <td>{{$item->email}}</td>
-                                <td>{{$item->phone}}</td>
+                                <td>{{$item->countCourses()}}</td>
+                                <td>{{$item->averageScore()}}</td>
+                                <td>
+                                    {{-- <a href="{{ route('admin.customer.show', $item->id) }}" class="btn btn-primary">Xem</a> --}}
+                                </td>
                             </tr>
                             @empty
                             <tr>
@@ -39,7 +45,7 @@
                         </tbody>
                     </table>
                 </div>
-                {!! $user->links('pagination::bootstrap-5') !!}
+                {!! $customer->links('pagination::bootstrap-5') !!}
             </div>
         </div><!-- container -->
 
