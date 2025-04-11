@@ -37,7 +37,7 @@ class CoursesApiController extends Controller
         if($usercourses){
             // dd("có khóa học này rồi");
 
-            return response()->json(['message' => 'Bạn đã đăng ký khóa học này rồi!'], 401);
+            return response()->json(['message' => 'Bạn đã đăng ký khóa học này rồi!'], 201);
         }else{
             // dd("chưa có khóa học này");
             try {
@@ -53,14 +53,16 @@ class CoursesApiController extends Controller
         
     }
     public function GetAllCoursesUser(int $id)
-    {
-        $user_courses = User_courses::where('user_id', $id)->get();
-        $courses = [];
-        foreach ($user_courses as $key => $value) {
-            $courses[] = Courses::find($value->course_id);
-        }
-        return response()->json($courses, 200);
-    }
+{
+    $courses = User_courses::with('course')
+        ->where('user_id', $id)
+        ->paginate(6);
+    $courses->getCollection()->transform(function ($item) {
+        return $item->course;
+    });
+    dd($courses);
 
+    return response()->json($courses, 200);
+}
 
 }

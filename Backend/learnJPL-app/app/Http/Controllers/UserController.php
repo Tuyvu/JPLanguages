@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Heatmap_lessons;
 use Hash;
 use Auth;
 
@@ -39,5 +40,9 @@ class UserController extends Controller
     public function logout(Request $request){
         Auth::logout();
         return response()->json(['message' => 'Logout successful'], 200);
+    }
+    public function profile(int $id){
+        $heatmap = Heatmap_lessons::where('user_id', $id)->get();
+        return response()->json($heatmap, 200);
     }
 }

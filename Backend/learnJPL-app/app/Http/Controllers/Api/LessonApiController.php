@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User_lessons;
+use App\Models\Heatmap_lessons;
+use Carbon\Carbon;
 
 
 class LessonApiController extends Controller
@@ -22,33 +24,50 @@ class LessonApiController extends Controller
     }
     public function lessonUser(Request $request)
     {
-        $lesson_user = User_lessons::where([
-            ['user_id', '=', $request->user_id],
-            ['lesson_id', '=', $request->lesson_id]
-        ])->first();
-        try{
-            if($lesson_user && $request->is_completed == true){
-            $lesson_user = User_lessons::update([
-                'watched_duration'=>$request->time_watched,
-            ]);
-            return response()->json($lesson_user, 200);
-        }elseif($lesson_user && $request->is_completed == false){
-            $lesson_user = User_lessons::update([
-                'watched_duration'=>$request->time_watched,
-                'is_completed'=>$request->is_completed,
-            ]);
-            return response()->json($lesson_user, 200);
-        }else{ 
-                $lesson_user = User_lessons::create([
-                    'user_id'=>$request->user_id,
-                    'lesson_id'=>$request->lesson_id,
-                    'watched_duration'=>$request->time_watched,
-                    'is_completed'=>$request->is_completed,
+        try {
+            $lesson_user = User_lessons::where([
+                ['user_id', '=', $request->user_id],
+                ['lesson_id', '=', $request->lesson_id]
+            ])->first();
+
+            if ($lesson_user) {
+                $lesson_user->update([
+                    'watched_duration' => $request->time_watched,
+                    'is_completed' => $request->is_completed?1:0,
                 ]);
-                    return response()->json($lesson_user, 200);
-            }  
-        }catch (\Throwable $th) {
-                return response()->json(['message' => 'Error fetching lessons'], 500);
+            } else {
+                $lesson_user = User_lessons::create([
+                    'user_id' => $request->user_id,
+                    'lesson_id' => $request->lesson_id,
+                    'watched_duration' => $request->time_watched,
+                    'is_completed' => $request->is_completed?1:0,
+                ]);
+            }
+
+       
+            if ($request->is_completed == true) {
+                $today = Carbon::today()->toDateString();
+
+                $heatmap = Heatmap_lessons::where('user_id', $request->user_id)
+                    ->whereDate('date', $today)
+                    ->first();
+
+                if ($heatmap) {
+                    $heatmap->increment('votes');
+                } else {
+                    Heatmap_lessons::create([
+                        'user_id' => $request->user_id,
+                        'date' => $today,
+                        'votes' => 1,
+                    ]);
+                }
+            }
+
+            return response()->json($lesson_user, 200);
+
+        } catch (\Throwable $th) {
+            dd($th);
+            return response()->json(['message' => 'Error fetching lessons'], 500);
         }
     }
 }
