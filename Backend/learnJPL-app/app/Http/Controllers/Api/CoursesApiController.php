@@ -53,16 +53,24 @@ class CoursesApiController extends Controller
         
     }
     public function GetAllCoursesUser(int $id)
-{
-    $courses = User_courses::with('course')
-        ->where('user_id', $id)
-        ->paginate(6);
-    $courses->getCollection()->transform(function ($item) {
-        return $item->course;
-    });
-    dd($courses);
+    {
+        $courses = User_courses::with('course')
+            ->where('user_id', $id)
+            ->paginate(6);
+        $courses->getCollection()->transform(function ($item) {
+            return $item->course;
+        });
+        dd($courses);
 
-    return response()->json($courses, 200);
-}
+        return response()->json($courses, 200);
+    }
+    public function TheLastLesson(int $id, int $lessonId)
+    {
+        
+        $courses = User_courses::where('user_id', $id)->update([
+            'The_last_Courses'=>$lessonId
+        ]);
+        return response()->json($courses, 200);
+    }
 
 }

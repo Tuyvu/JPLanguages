@@ -12,9 +12,10 @@ class User_lessons extends Model
     {
         return $this->belongsTo(Users::class);
     }
-
+  
     public function lessons()
     {
         return $this->belongsTo(Lessons::class);
     }
 }
+ 

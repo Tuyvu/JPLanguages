@@ -17,5 +17,20 @@ class Lessons extends Model
     {
         return $this->belongsTo(Courses::class);
     }
+    public function conversations() {
+        return $this->hasMany(Conversation::class);
+    }
+    
+    public function vocabularies() {
+        return $this->hasMany(Vocabulary::class);
+    }
+    
+    public function sentencePatterns() {
+        return $this->hasMany(SentencePattern::class);
+    }
+    
+    public function kanjis() {
+        return $this->hasMany(Kanji::class);
+    }
    
 }

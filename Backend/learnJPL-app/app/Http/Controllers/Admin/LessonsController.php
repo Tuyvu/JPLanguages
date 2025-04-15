@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Courses;
+use App\Models\Conversation;
+use App\Models\Vocabulary;
+use App\Models\Pattern;
+use App\Models\Kanji;
 use App\Models\Lessons;
 
 
@@ -34,12 +38,83 @@ class LessonsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'course_id' => 'required|exists:courses,id',
+            'video_url' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
+        ]);
+
+        DB::beginTransaction();
         try {
-            $lessons = Lessons::create($request->all());
-        return redirect()->route('lessons.index');
-        } catch (\Throwable $th) {
-            dd($th);
+            // Tạo bài học chính
+            $lesson = Lesson::create([
+                'title' => $request->title,
+                'course_id' => $request->course_id,
+                'video_url' => $request->video_url,
+                'content' => $request->content,
+            ]);
+
+            // Hội thoại
+            if ($request->has('conversations')) {
+                foreach ($request->conversations as $item) {
+                    if (!empty($item['speaker']) || !empty($item['content'])) {
+                        $lesson->conversations()->create([
+                            'speaker' => $item['speaker'],
+                            'content' => $item['content'],
+                        ]);
+                    }
+                }
+            }
+
+            // Từ vựng
+            if ($request->has('vocabularies')) {
+                foreach ($request->vocabularies as $item) {
+                    if (!empty($item['word'])) {
+                        $lesson->vocabularies()->create([
+                            'word' => $item['word'],
+                            'meaning' => $item['meaning'],
+                            'pronunciation' => $item['pronunciation'],
+                            'example_sentence' => $item['example_sentence'],
+                        ]);
+                    }
+                }
+            }
+
+            // Mẫu câu
+            if ($request->has('patterns')) {
+                foreach ($request->patterns as $item) {
+                    if (!empty($item['pattern'])) {
+                        $lesson->patterns()->create([
+                            'pattern' => $item['pattern'],
+                            'usage' => $item['usage'],
+                            'example' => $item['example'],
+                        ]);
+                    }
+                }
+            }
+
+            // Chữ Hán
+            if ($request->has('kanjis')) {
+                foreach ($request->kanjis as $item) {
+                    if (!empty($item['character'])) {
+                        $lesson->kanjis()->create([
+                            'character' => $item['character'],
+                            'meaning' => $item['meaning'],
+                            'onyomi' => $item['onyomi'],
+                            'kunyomi' => $item['kunyomi'],
+                            'strokes' => $item['strokes'],
+                            'example' => $item['example'],
+                        ]);
+                    }
+                }
+            }
+
+            DB::commit();
+            return redirect()->route('lessons.index')->with('success', 'Tạo bài học thành công!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->withInput()->with('error', 'Lỗi: ' . $e->getMessage());
         }
     }
 

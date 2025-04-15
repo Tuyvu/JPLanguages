@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User_lessons;
+use App\Models\User_courses;
 use App\Models\Heatmap_lessons;
 use Carbon\Carbon;
 
@@ -24,6 +25,7 @@ class LessonApiController extends Controller
     }
     public function lessonUser(Request $request)
     {
+        // dd($request->all());
         try {
             $lesson_user = User_lessons::where([
                 ['user_id', '=', $request->user_id],
@@ -62,7 +64,11 @@ class LessonApiController extends Controller
                     ]);
                 }
             }
-
+            $user_courses = User_courses::where([
+                    ['user_id', '=', $request->user_id],
+                    ['course_id', '=', $request->courseId],
+                ])->update(['The_last_Courses' => $request->lesson_id]);
+        // dd($user_courses);
             return response()->json($lesson_user, 200);
 
         } catch (\Throwable $th) {

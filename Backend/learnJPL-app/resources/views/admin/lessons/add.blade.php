@@ -57,6 +57,57 @@
                                     <span class="help-block" style="color: red;">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label for="conversations">Hội thoại</label>
+                                <div id="conversation-wrapper">
+                                    <div class="conversation-item mb-2">
+                                        <input type="text" name="conversations[0][speaker]" class="form-control mb-1" placeholder="Người nói (ví dụ: A)">
+                                        <textarea name="conversations[0][content]" class="form-control" placeholder="Nội dung hội thoại"></textarea>
+                                        <button type="button" class="btn btn-danger btn-sm remove-field mt-2">Xóa</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-secondary mt-1" onclick="addConversation()">+ Thêm câu</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="vocabularies">Từ vựng</label>
+                                <div id="vocab-wrapper">
+                                    <div class="vocab-item mb-2">
+                                        <input type="text" name="vocabularies[0][word]" class="form-control mb-1" placeholder="Từ">
+                                        <input type="text" name="vocabularies[0][meaning]" class="form-control mb-1" placeholder="Nghĩa">
+                                        <input type="text" name="vocabularies[0][pronunciation]" class="form-control mb-1" placeholder="Cách đọc">
+                                        <input type="text" name="vocabularies[0][example_sentence]" class="form-control" placeholder="Câu ví dụ">
+                                        <button type="button" class="btn btn-danger btn-sm remove-field mt-2">Xóa</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-secondary mt-1" onclick="addVocab()">+ Thêm từ</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="patterns">Mẫu câu</label>
+                                <div id="pattern-wrapper">
+                                    <div class="pattern-item mb-2">
+                                        <input type="text" name="patterns[0][pattern]" class="form-control mb-1" placeholder="Mẫu câu">
+                                        <input type="text" name="patterns[0][usage]" class="form-control mb-1" placeholder="Cách dùng">
+                                        <input type="text" name="patterns[0][example]" class="form-control" placeholder="Ví dụ">
+                                        <button type="button" class="btn btn-danger btn-sm remove-field mt-2">Xóa</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-secondary mt-1" onclick="addPattern()">+ Thêm mẫu câu</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="kanjis">Chữ Hán</label>
+                                <div id="kanji-wrapper">
+                                    <div class="kanji-item mb-2">
+                                        <input type="text" name="kanjis[0][character]" class="form-control mb-1" placeholder="Chữ Hán">
+                                        <input type="text" name="kanjis[0][meaning]" class="form-control mb-1" placeholder="Ý nghĩa">
+                                        <input type="text" name="kanjis[0][onyomi]" class="form-control mb-1" placeholder="Âm On">
+                                        <input type="text" name="kanjis[0][kunyomi]" class="form-control mb-1" placeholder="Âm Kun">
+                                        <input type="number" name="kanjis[0][strokes]" class="form-control mb-1" placeholder="Số nét">
+                                        <input type="text" name="kanjis[0][example]" class="form-control" placeholder="Ví dụ">
+                                        <button type="button" class="btn btn-danger btn-sm remove-field mt-2">Xóa</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-secondary mt-1" onclick="addKanji()">+ Thêm chữ</button>
+                            </div>
                         </div>
                         <!-- /.box-body -->
 
@@ -70,8 +121,8 @@
             <!-- end page content -->
         </div>
     </div>
-</div>
-
+</div> 
+{{-- hội thoại, từ vựng, Mẫu câu, chữ hán kết hợp api chuyển đổi sang hán tự --}}
         <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
         <script>
         ClassicEditor
@@ -84,4 +135,69 @@
                 } );
         </script>
         <script>
+            let conversationIndex = 1;
+            let vocabIndex = 1;
+            let patternIndex = 1;
+            let kanjiIndex = 1;
+        
+            function addConversation() {
+                const html = `
+                    <div class="conversation-item mb-2">
+                        <input type="text" name="conversations[${conversationIndex}][speaker]" class="form-control mb-1" placeholder="Người nói">
+                        <textarea name="conversations[${conversationIndex}][content]" class="form-control" placeholder="Nội dung hội thoại"></textarea>
+                        <button type="button" class="btn btn-danger btn-sm remove-field mt-2">Xóa</button>
+                    </div>`;
+                document.getElementById('conversation-wrapper').insertAdjacentHTML('beforeend', html);
+                conversationIndex++;
+            }
+        
+            function addVocab() {
+                const html = `
+                    <div class="vocab-item mb-2">
+                        <input type="text" name="vocabularies[${vocabIndex}][word]" class="form-control mb-1" placeholder="Từ">
+                        <input type="text" name="vocabularies[${vocabIndex}][meaning]" class="form-control mb-1" placeholder="Nghĩa">
+                        <input type="text" name="vocabularies[${vocabIndex}][pronunciation]" class="form-control mb-1" placeholder="Cách đọc">
+                        <input type="text" name="vocabularies[${vocabIndex}][example_sentence]" class="form-control" placeholder="Câu ví dụ">
+                        <button type="button" class="btn btn-danger btn-sm remove-field mt-2">Xóa</button>
+
+                    </div>`;
+                document.getElementById('vocab-wrapper').insertAdjacentHTML('beforeend', html);
+                vocabIndex++;
+            }
+        
+            function addPattern() {
+                const html = `
+                    <div class="pattern-item mb-2">
+                        <input type="text" name="patterns[${patternIndex}][pattern]" class="form-control mb-1" placeholder="Mẫu câu">
+                        <input type="text" name="patterns[${patternIndex}][usage]" class="form-control mb-1" placeholder="Cách dùng">
+                        <input type="text" name="patterns[${patternIndex}][example]" class="form-control" placeholder="Ví dụ">
+                        <button type="button" class="btn btn-danger btn-sm remove-field mt-2">Xóa</button>
+
+                    </div>`;
+                document.getElementById('pattern-wrapper').insertAdjacentHTML('beforeend', html);
+                patternIndex++;
+            }
+        
+            function addKanji() {
+                const html = `
+                    <div class="kanji-item mb-2">
+                        <input type="text" name="kanjis[${kanjiIndex}][character]" class="form-control mb-1" placeholder="Chữ Hán">
+                        <input type="text" name="kanjis[${kanjiIndex}][meaning]" class="form-control mb-1" placeholder="Ý nghĩa">
+                        <input type="text" name="kanjis[${kanjiIndex}][onyomi]" class="form-control mb-1" placeholder="Âm On">
+                        <input type="text" name="kanjis[${kanjiIndex}][kunyomi]" class="form-control mb-1" placeholder="Âm Kun">
+                        <input type="number" name="kanjis[${kanjiIndex}][strokes]" class="form-control mb-1" placeholder="Số nét">
+                        <input type="text" name="kanjis[${kanjiIndex}][example]" class="form-control" placeholder="Ví dụ">
+                        <button type="button" class="btn btn-danger btn-sm remove-field mt-2">Xóa</button>
+
+                    </div>`;
+                document.getElementById('kanji-wrapper').insertAdjacentHTML('beforeend', html);
+                kanjiIndex++;
+            }
+            document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-field')) {
+            e.target.parentElement.remove();
+        }
+    });
+        </script>
+        
 @endsection

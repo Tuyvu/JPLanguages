@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->float('progress')->default(0);
+            $table->integer('The_last_Courses');
             $table->enum('status', ['ongoing', 'completed'])->default('ongoing');
             $table->timestamp('enrolled_at')->useCurrent();
             $table->timestamp('completed_at')->nullable();
