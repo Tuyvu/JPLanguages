@@ -38,17 +38,11 @@ class LessonsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'course_id' => 'required|exists:courses,id',
-            'video_url' => 'nullable|string|max:255',
-            'content' => 'nullable|string',
-        ]);
+        dd($request->all());
 
-        DB::beginTransaction();
         try {
             // Tạo bài học chính
-            $lesson = Lesson::create([
+            $lesson = Lessons::create([
                 'title' => $request->title,
                 'course_id' => $request->course_id,
                 'video_url' => $request->video_url,
@@ -110,10 +104,8 @@ class LessonsController extends Controller
                 }
             }
 
-            DB::commit();
             return redirect()->route('lessons.index')->with('success', 'Tạo bài học thành công!');
         } catch (\Exception $e) {
-            DB::rollback();
             return back()->withInput()->with('error', 'Lỗi: ' . $e->getMessage());
         }
     }
