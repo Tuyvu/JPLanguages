@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('lesson_id')->constrained('lessons')->onDelete('cascade');
             $table->string('word');
             $table->text('meaning');
-            $table->string('pronunciation')->nullable(); // ví dụ: hiragana, romaji
+            $table->string('pronunciation')->nullable(); 
             $table->text('example_sentence')->nullable();
             $table->timestamps();
         });

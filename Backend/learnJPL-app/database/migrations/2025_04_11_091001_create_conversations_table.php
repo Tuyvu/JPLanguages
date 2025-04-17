@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('lesson_id')->constrained('lessons')->onDelete('cascade');
             $table->string('speaker', 50);
             $table->text('content');
+            $table->text('meaning');
+            $table->string('pronunciation')->nullable();
             $table->timestamps();
         });
     }

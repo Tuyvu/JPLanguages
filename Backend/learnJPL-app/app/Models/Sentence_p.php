@@ -9,6 +9,7 @@ class Sentence_p extends Model
 {
     protected $fillable = [
         'lesson_id',
+        'title'
         'pattern',
         'usage',
         'example'

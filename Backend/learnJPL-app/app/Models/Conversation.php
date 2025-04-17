@@ -9,7 +9,7 @@ class Conversation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['lesson_id','speaker','content'];
+    protected $fillable = ['lesson_id','speaker','content','meaning','pronunciation'];
 
     public function lesson()
     {

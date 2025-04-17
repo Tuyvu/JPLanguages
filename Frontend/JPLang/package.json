@@ -1,0 +1,28 @@
+{
+  "name": "jplang",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "bootstrap": "^5.3.3",
+    "pinia": "^3.0.1",
+    "pinia-plugin-persistedstate": "^4.2.0",
+    "sass": "^1.83.4",
+    "swiper": "^11.2.1",
+    "tippy.js": "^6.3.7",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vue3-calendar-heatmap": "^2.0.5",
+    "wanakana": "^5.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.5"
+  }
+}
