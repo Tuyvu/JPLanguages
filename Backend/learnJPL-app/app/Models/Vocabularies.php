@@ -12,11 +12,11 @@ class Vocabularies extends Model
         'word',
         'meaning',
         'pronunciation',
-        'example_sentence',
+        'example_sentence'
     ];
 
     public function lesson()
     {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(Lessons::class, 'lesson_id');
     }
 }

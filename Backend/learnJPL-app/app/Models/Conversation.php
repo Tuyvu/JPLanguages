@@ -9,10 +9,10 @@ class Conversation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['lesson_id','speaker','content',];
+    protected $fillable = ['lesson_id','speaker','content'];
 
     public function lesson()
     {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(Lessons::class, 'lesson_id');
     }
 }

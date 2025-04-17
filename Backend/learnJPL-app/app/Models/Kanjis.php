@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kanjis extends Model
 {
-    class Kanji extends Model
-{
+
     use HasFactory;
 
     protected $fillable = [
@@ -18,12 +17,11 @@ class Kanjis extends Model
         'onyomi',
         'kunyomi',
         'strokes',
-        'example',
+        'example'
     ];
 
     public function lesson()
     {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(Lessons::class, 'lesson_id');
     }
-}
 }

@@ -16,16 +16,17 @@ class CoursesApiController extends Controller
         return response()->json(Courses::paginate(10), 200);
     }
     public function CoursesID(int $id)
-    {
-        // dd($id);
-        $lesson_courses = Lessons::where('course_id',$id)?->paginate(10);
-    // dd($lesson_courses);
-        if($lesson_courses){
-            return response()->json($lesson_courses, 200);
-        }else{
-            return response()->json(['message'=>'Course not found'], 404);
-        }
+{
+    $lesson_courses = Lessons::with(['conversations', 'vocabularies','sentencePatterns', 'kanjis'])
+                            ->where('course_id', $id)
+                            ->paginate(10);
+
+    if ($lesson_courses) {
+        return response()->json($lesson_courses, 200);
+    } else {
+        return response()->json(['message' => 'Course not found'], 404);
     }
+}
     public function Bookcourses(Request $request)
     {
         // dd($request->all());

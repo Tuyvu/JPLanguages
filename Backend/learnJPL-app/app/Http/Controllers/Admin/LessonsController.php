@@ -38,7 +38,7 @@ class LessonsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
 
         try {
             // Tạo bài học chính
@@ -79,7 +79,7 @@ class LessonsController extends Controller
             if ($request->has('patterns')) {
                 foreach ($request->patterns as $item) {
                     if (!empty($item['pattern'])) {
-                        $lesson->patterns()->create([
+                        $lesson->sentencePatterns()->create([
                             'pattern' => $item['pattern'],
                             'usage' => $item['usage'],
                             'example' => $item['example'],
@@ -106,6 +106,7 @@ class LessonsController extends Controller
 
             return redirect()->route('lessons.index')->with('success', 'Tạo bài học thành công!');
         } catch (\Exception $e) {
+            dd($e);
             return back()->withInput()->with('error', 'Lỗi: ' . $e->getMessage());
         }
     }

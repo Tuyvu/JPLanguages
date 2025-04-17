@@ -11,11 +11,11 @@ class Sentence_p extends Model
         'lesson_id',
         'pattern',
         'usage',
-        'example',
+        'example'
     ];
 
     public function lesson()
     {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(Lessons::class, 'lesson_id');
     }
 }

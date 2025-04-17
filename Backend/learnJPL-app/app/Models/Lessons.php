@@ -18,19 +18,19 @@ class Lessons extends Model
         return $this->belongsTo(Courses::class);
     }
     public function conversations() {
-        return $this->hasMany(Conversation::class);
+        return $this->hasMany(Conversation::class, 'lesson_id');
     }
     
     public function vocabularies() {
-        return $this->hasMany(Vocabulary::class);
+        return $this->hasMany(Vocabularies::class, 'lesson_id');
     }
     
     public function sentencePatterns() {
-        return $this->hasMany(SentencePattern::class);
+        return $this->hasMany(Sentence_p::class, 'lesson_id');
     }
     
     public function kanjis() {
-        return $this->hasMany(Kanji::class);
+        return $this->hasMany(kanjis::class, 'lesson_id');
     }
    
 }
