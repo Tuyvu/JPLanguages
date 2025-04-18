@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\JapaneseWordController;
 use App\Http\Controllers\Api\CoursesApiController;
 use App\Http\Controllers\Api\LessonApiController;
+use App\Http\Controllers\Api\DetailApiController;
 
 
 
@@ -25,3 +26,4 @@ Route::get('/courses_user/{id}', [CoursesApiController::class, 'GetAllCoursesUse
 Route::post('/courses/bookcourses', [CoursesApiController::class, 'Bookcourses']);
 Route::post('/lesson/lessonUser', [LessonApiController::class, 'lessonUser']);
 
+Route::get('/GetVocabularies', [DetailApiController::class, 'GetVocabularies']);

@@ -16,7 +16,7 @@
 
               <!-- Video -->
               <li class="nav-item flex-fill text-center p-3 border-start border-end border-1">
-                <router-link class="nav-link" :to="{ name: 'chuongtrinh' }">
+                <router-link class="nav-link" :to="{ name: 'coures' }">
                   <i class="icn-video"></i> Video
                 </router-link>
               </li>
@@ -42,19 +42,13 @@
                 </div>
                 <ul class="dropdown-menu">
                   <li>
-                    <router-link class="dropdown-item p-3" :to="{ name: 'jpsearch' }">Từ vựng</router-link>
+                    <router-link class="dropdown-item p-3" :to="{ name: 'jpsearch' }">Dịch</router-link>
                   </li>
                   <li>
-                    <router-link class="dropdown-item p-3" :to="{ name: 'chuongtrinh' }">Mở rộng</router-link>
+                    <router-link class="dropdown-item p-3" :to="{ name: 'GetConversations' }">Từ vựng</router-link>
                   </li>
                   <li>
-                    <router-link class="dropdown-item p-3" :to="{ name: 'chuongtrinh' }">Thực hàng</router-link>
-                  </li>
-                  <li>
-                    <router-link class="dropdown-item p-3" :to="{ name: 'chuongtrinh' }">Nâng cao</router-link>
-                  </li>
-                  <li>
-                    <router-link class="dropdown-item p-3" :to="{ name: 'converstation' }">Giao tiếp</router-link>
+                    <router-link class="dropdown-item p-3" :to="{ name: 'chuongtrinh' }">Thực hành</router-link>
                   </li>
                 </ul>
               </li>
