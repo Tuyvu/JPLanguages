@@ -1,5 +1,6 @@
 <template>
-  <div class="bg-light border border-1">
+  <div class="container">
+    <div class="bg-light border border-1">
     <div class="container">
       <nav id="main-menu" class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -48,7 +49,7 @@
                     <router-link class="dropdown-item p-3" :to="{ name: 'GetConversations' }">Từ vựng</router-link>
                   </li>
                   <li>
-                    <router-link class="dropdown-item p-3" :to="{ name: 'chuongtrinh' }">Thực hành</router-link>
+                    <router-link class="dropdown-item p-3" :to="{ name: 'test' }">Thực hành</router-link>
                   </li>
                 </ul>
               </li>
@@ -64,6 +65,7 @@
         </div>
       </nav>
     </div>
+  </div>
   </div>
 
 

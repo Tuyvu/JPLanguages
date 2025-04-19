@@ -51,6 +51,10 @@ const user = [
                 path: "/GetConversations",
                 name: "GetConversations",
                 component: () => import("../pages/users/vocabularies.vue"),
+            },{
+                path: "/Test",
+                name: "test",
+                component: () => import("../pages/users/test.vue"),
             }
         ],
     }, {

@@ -27,3 +27,4 @@ Route::post('/courses/bookcourses', [CoursesApiController::class, 'Bookcourses']
 Route::post('/lesson/lessonUser', [LessonApiController::class, 'lessonUser']);
 
 Route::get('/GetVocabularies', [DetailApiController::class, 'GetVocabularies']);
+Route::get('/GetTest', [DetailApiController::class, 'GetTest']);
